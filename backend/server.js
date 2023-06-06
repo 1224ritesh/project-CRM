@@ -16,7 +16,7 @@ const app = express();
 // middleware to parse json data in the body
 app.use(express.json());
 // middleware to parse form data in the body and that allows to form data as well 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/users', userRoutes);
