@@ -45,6 +45,14 @@ userSchema.pre('save', async function(next){
 });
 
 
+// compare the password with the password in the database while logging in 
+// bcrypt compare method to compare the password with the password in the database.
+// didn't use arrow function here because of this keyword which will refer to the current user. 
+userSchema.methods.matchPassword = async function(enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password);
+}
+
+
 
 
 
