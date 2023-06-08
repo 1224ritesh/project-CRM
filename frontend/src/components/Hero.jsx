@@ -1,4 +1,5 @@
 import { Container, Card, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Hero = () => {
   return (
@@ -10,14 +11,20 @@ const Hero = () => {
                     This is a Company secretory CRM made with React and Bootstrap in frontend. And Node, Express, MongoDB in backend.
                 </p>
                 <div className="d-flex">
-                    <Button variant="primary" className="me-3" href="/login">
-                        <i className="bi bi-box-arrow-in-right"></i>
-                        <span>Login</span>
-                    </Button>
-                    <Button variant="secondary" href="/register">
-                        <i className="bi bi-box-arrow-in-left"></i>
-                        <span>SignUp</span>
-                    </Button>
+                    <LinkContainer to='/login'>
+                        <Button variant="primary" className="me-3" >
+                            <i className="bi bi-box-arrow-in-right"></i>
+                            <span>Login</span>
+                        </Button>
+                    </LinkContainer>
+                    
+                    <LinkContainer to='/register'>
+                        <Button variant="secondary" >
+                            <i className="bi bi-box-arrow-in-left"></i>
+                            <span>SignUp</span>
+                        </Button>
+                    </LinkContainer>
+                    
                 </div>
              
                 
