@@ -1,7 +1,23 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect  } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
+import{toast} from 'react-toastify';
+import Loader from "../components/Loader";
+
+// useDispatch hook to dispatch actions to the store and useSelector select the global state from the store. 
+import { useDispatch, useSelector } from "react-redux";
+
+
+// import the actions from the usersApiSlice file to use them in the component.
+import { useLoginMutation } from "../slices/usersApiSlice";
+
+// import the setCredentials action from the authSlice file to set the user's credentials in the store.
+import { setCredentials } from "../slices/authSlice";
+
+
+
+
 
 const LoginScreen = () => {
   // set the state for the form inputs
@@ -9,10 +25,36 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // use the useLoginMutation hook to dispatch the login action to the store. it do it automatically and return the data, error and isLoading.
+  const [login, {  isLoading }] = useLoginMutation();
+
+  // get the user data from the store "userInfo" is the name of the reducer in the store. to get the data use useSelector hook. and pass the state to it as a parameter.  
+  const {userInfo} = useSelector( (state)  => state.auth);
+
+  // useEffect hook to check if the user is already logged in and redirect him to the home page if he is.
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
+
   // submit handler for the form
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("submit");
+    try {
+      // this will dispatch the login action to the store. it will return the data, error and isLoading.
+      // unwrap() is a function that will return the data if there is no error. if there is an error it will throw it. it is a function from the RTK Query. it returns a promise.
+      const res = await login({ phoneNumber, password }).unwrap();
+      // dispatch the setCredentials action to the store.
+      dispatch(setCredentials({...res}));
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
 
   return (
@@ -37,29 +79,24 @@ const LoginScreen = () => {
           <Form.Group className="my-2" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              isValid={validPassword}
-              maxLength={16}
-              minLength={4}
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => {
-                password.length < 4
-                  ? setValidPassword(false)
-                  : setValidPassword(true);
-                setPassword(e.target.value);
-              }}
+             isValid={validPassword}
+             maxLength={16}
+             minLength={4}
+             type="password"
+             placeholder="password"
+             value={password}
+             onChange={(e) => {
+               password.length < 4
+                 ? setValidPassword(false)
+                 : setValidPassword(true);
+               setPassword(e.target.value);
+             }}
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="mt-2">
-            <Link
-              to="/login"
-              className="text-white"
-              style={{ textDecoration: "none" }}
-            >
-              Sign In
-            </Link>
+             {isLoading && <Loader></Loader>}
+          <Button type="submit" variant="primary" className="mt-2 text-white">
+            Sign In
           </Button>
 
           <Row className="py-3">
