@@ -29,10 +29,4 @@ const protect = asyncHandler(async (req, res, next) => {
     
 });
 
-// latter add the admin middleware here and use it in the routes and controllers and protect the routes from unauthorized users
-
-
-
-
-
 export { protect };

@@ -42,7 +42,7 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
 
   // get data from the body
-  const {name, email, phoneNumber, password} = req.body;
+  const {name, email, phoneNumber, password, memberID} = req.body;
 
   // checks if user already exists in the database or not
   const userExist = await User.findOne({phoneNumber});
@@ -56,7 +56,8 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     phoneNumber,
-    password
+    password,
+    memberID
   });
 
   // if user is created successfully
@@ -70,7 +71,8 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      phoneNumber: user.phoneNumber
+      phoneNumber: user.phoneNumber,
+      memberID: user.memberID
     });
   }else{
     res.status(400);
@@ -102,7 +104,8 @@ const getUserProfile = asyncHandler((req, res) => {
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,
-    phoneNumber: req.user.phoneNumber
+    phoneNumber: req.user.phoneNumber,
+    memberID: req.user.memberID
   }
   res.status(200).json(user);
 });

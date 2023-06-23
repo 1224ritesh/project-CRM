@@ -15,6 +15,8 @@ const ProfileScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [userType, setUserType] = useState("");
+  const [memberID, setMemberID] = useState("");
 
   
   const dispatch = useDispatch();
@@ -50,6 +52,8 @@ const ProfileScreen = () => {
           email,
           phoneNumber,
           password,
+          userType,
+          memberID
         }).unwrap();// this is the payload that we will send to the server.
         dispatch(setCredentials({...res}));// this will update the user info in the store.
         toast.success('Profile Updated Successfully')
@@ -116,6 +120,46 @@ const ProfileScreen = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
+
+            <Form.Group className="my-2" controlId="userType">
+            <Form.Label>User Type</Form.Label>
+            <Form.Control
+              as="select"
+              value={userType}
+              onChange={(e) => setUserType(e.target.value)}
+            >
+              <option value="">Select User Type</option>
+              <option value="CA">CA</option>
+              <option value="CS">CS</option>
+            </Form.Control>
+          </Form.Group>
+
+          {userType === "CA" && (
+            <Form.Group className="my-2" controlId="caMemberID">
+              <Form.Label>CA Member ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter CA Member ID"
+                value={memberID}
+                onChange={(e) => setMemberID(e.target.value)}
+              />
+            </Form.Group>
+          )}
+
+          {userType === "CS" && (
+            <Form.Group className="my-2" controlId="csMemberID">
+              <Form.Label>CS Member ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter CS Member ID"
+                value={memberID}
+                onChange={(e) => setMemberID(e.target.value)}
+              />
+            </Form.Group>
+          )}
+
+
+
           </Form.Group>
             {isLoading && <Loader/>}
           <Button type="submit" variant="primary" className="mt-2 text-white">

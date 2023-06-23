@@ -38,6 +38,7 @@ const LoginScreen = () => {
   useEffect(() => {
     if (userInfo) {
       navigate("/");
+      //navigate("/profile");
     }
   }, [navigate, userInfo]);
 

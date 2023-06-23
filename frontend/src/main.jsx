@@ -17,6 +17,9 @@ import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
 import ProfileScreen from "./screens/ProfileScreen";
+import ClientProfileScreen from "./screens/ClientProfileScreen";
+
+
 
 
 //creating routes for the app
@@ -30,6 +33,7 @@ const router = createBrowserRouter(
       {/*providing private route to the app to protect the profile page from unauthenticated users*/}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/profile" element={<ClientProfileScreen />} />
       </Route>
     </Route>
   )

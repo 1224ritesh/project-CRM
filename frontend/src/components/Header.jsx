@@ -2,8 +2,7 @@ import {
   Navbar,
   Nav,
   Container,
-  Dropdown,
-  Badge,
+ 
   NavDropdown,
 } from "react-bootstrap";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
@@ -44,7 +43,7 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>CRM</Navbar.Brand>
+            <Navbar.Brand>Corp-Wise Connect</Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -70,7 +69,7 @@ const Header = () => {
                   <LinkContainer to="/register">
                     <Nav.Link>
                       <FaSignOutAlt />
-                      Sign Out
+                      Sign Up
                     </Nav.Link>
                   </LinkContainer>
                 </>

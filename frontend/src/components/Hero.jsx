@@ -6,28 +6,28 @@ const Hero = () => {
     <div className="py-5">
         <Container className="d-flex justify-content-center">
             <Card className="p-5 d-flex flex-column align-items-center hero-card bg-light w-75">
-                <h1 className="text-center mb-4">Welcome to the CRM</h1>
+                <h1 className="text-center mb-4">Welcome to the Corp-Wise Connect</h1>
                 <p>
-                    This is a Company secretory CRM made with React and Bootstrap in frontend. And Node, Express, MongoDB in backend.
+                    This is the platform where you can get CA & CS services at your fingertips. 
                 </p>
                 <div className="d-flex">
                     <LinkContainer to='/login'>
                         <Button variant="primary" className="me-3" >
                             <i className="bi bi-box-arrow-in-right"></i>
-                            <span>Login</span>
+                            <span>Search your CA & CS</span>
                         </Button>
                     </LinkContainer>
                     
-                    <LinkContainer to='/register'>
+                    <LinkContainer to='/login'>
                         <Button variant="secondary" >
                             <i className="bi bi-box-arrow-in-left"></i>
-                            <span>SignUp</span>
+                            <span>CA & CS</span>
                         </Button>
                     </LinkContainer>
                     
                 </div>
              
-                
+            
             </Card>
 
         </Container>
